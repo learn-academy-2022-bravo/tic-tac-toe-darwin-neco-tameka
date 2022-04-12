@@ -2,6 +2,7 @@
   height: 200px;
   width: 200px;
   border: 2px solid black;
+  font-size:150px ;
 }
 
 .gameboard {
@@ -13,4 +14,5 @@
 
 h1 {
   text-align: center;
+  color: green
 }
