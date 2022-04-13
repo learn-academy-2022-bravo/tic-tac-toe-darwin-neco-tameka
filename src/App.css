@@ -12,7 +12,8 @@
   margin: 0 auto;
 }
 
-h1 {
+h1, h3 {
   text-align: center;
-  color: green
+  color: white;
+  font-family:"Algerian Font";
 }

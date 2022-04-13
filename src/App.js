@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-//import Board from './components/Board'
 import Square from './components/Square'
 import './App.css'
-//import Game from './components/Game'
+
 
 class App extends Component{
   constructor(props){
@@ -20,7 +19,7 @@ class App extends Component{
       squares[currentClick] = currentPlayer
       this.setState({
         squares: squares,
-        currentPlayer: currentPlayer === "☠️" ? "🧟" : "☠️"
+        currentPlayer: currentPlayer === "☠️" ? "⚓️": "☠️"
       })
     }
     this.winning()
@@ -45,13 +44,13 @@ class App extends Component{
       const { squares } = this.state
 
       if (
-        squares[one] === "❌" && squares[two] === "❌" && squares[three] === "❌"
+        squares[one] === "☠️" && squares[two] === "☠️" && squares[three] === "☠️"
       ) {
-        this.setState({ winner: "❌" })
+        this.setState({ winner: "☠️" })
       } else if (
-        squares[one] === "⭕️" && squares[two] === "⭕️" && squares[three] === "⭕️"
+        squares[one] === "⚓️" && squares[two] === "⚓️" && squares[three] === "⚓️"
       ) {
-        this.setState({ winner: "⭕️" })
+        this.setState({ winner: "⚓️" })
       }
     })
   }
@@ -60,19 +59,20 @@ class App extends Component{
     this.setState({
       squares: Array(9).fill(null),
       winner: null,
-      currentPlayer: "❌",
+      currentPlayer: "⚓️",
     })
   }
 
 
   render() {
-    const tieGame = this.state.squares.every(value => value !== null)
+    const {squares, winner} = this.state
+    const tieGame = squares.every(value => value !== null)
     return (
       <>
-        <h1>Three in a Row</h1>
-        {this.state.winner && <h3>{this.state.winner} WINS THE GAME!!</h3>}
-        {(tieGame && !this.state.winner) && <h3>TIE GAME!</h3>}
-        {(this.state.winner || tieGame) &&
+        <h1>Sink or Swim</h1>
+        {winner && <h3>{winner} WINS THE GAME!!</h3>}
+        {(tieGame && !winner) && <h3>TIE the game ended!</h3>}
+        {(winner || tieGame) &&
           <div className="button">
             <button onClick={this.restartTheGame}>
               Play Another Game
@@ -80,7 +80,7 @@ class App extends Component{
           </div>
         }
         <div className="gameboard">
-          {this.state.squares.map((value, index) => {
+          {squares.map((value, index) => {
             return (
               <Square
                 value={value}
